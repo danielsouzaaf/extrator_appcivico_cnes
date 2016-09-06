@@ -9,6 +9,6 @@ class Estabelecimento extends Model
     //
     public function uf()
     {
-       return $this->belongsTo('App\UF', 'uf_sigla', 'sigla');
+       return $this->belongsTo('App\UF', 'uf', 'sigla');
     }
 }
