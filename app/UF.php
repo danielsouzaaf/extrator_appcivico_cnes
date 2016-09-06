@@ -11,4 +11,5 @@ class UF extends Model
     {
       return $this->hasMany('App\Estabelecimento');
     }
+    protected $table = 'ufs';
 }
