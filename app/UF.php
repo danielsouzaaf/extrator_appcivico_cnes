@@ -12,4 +12,7 @@ class UF extends Model
       return $this->hasMany('App\Estabelecimento');
     }
     protected $table = 'ufs';
+    public $primarykey = 'sigla';
+    public $timestamps = false;
+    public $incrementing = false;
 }

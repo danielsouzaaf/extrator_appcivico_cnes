@@ -49,42 +49,51 @@ class ConsultarEstabelecimentos extends Command
       $est->codCnes = $estabelecimento['codCnes'];
       $est->codUnidade = $estabelecimento['codUnidade'];
       $est->codIbge = $estabelecimento['codIbge'];
-      $est->nomeFantasia = $estabelecimento['nomeFantasia'];
-      $est->natureza = $estabelecimento['natureza'];
-      $est->tipoUnidade = $estabelecimento['tipoUnidade'];
-      $est->esferaAdministrativa = $estabelecimento['esferaAdministrativa'];
-      $est->vinculoSus = $estabelecimento['vinculoSus'];
-      $est->retencao = $estabelecimento['retencao'];
-      $est->fluxoClientela = $estabelecimento['fluxoClientela'];
-      $est->origemGeografica = $estabelecimento['origemGeografica'];
-      $est->temAtendimentoUrgencia = $estabelecimento['temAtendimentoUrgencia'];
-      $est->temAtendimentoAmbulatorial = $estabelecimento['temAtendimentoAmbulatorial'];
-      $est->temCentroCirurgico = $estabelecimento['temCentroCirurgico'];
-      $est->temObstetra = $estabelecimento['temObstetra'];
-      $est->temNeoNatal = $estabelecimento['temNeoNatal'];
-      $est->temDialise = $estabelecimento['temDialise'];
-      $est->descricaoCompleta = $estabelecimento['descricaoCompleta'];
-      $est->tipoUnidadeCnes = $estabelecimento['tipoUnidadeCnes'];
-      $est->categoriaUnidade = $estabelecimento['categoriaUnidade'];
-      $est->logradouro = $estabelecimento['logradouro'];
-      $est->numero = $estabelecimento['numero'];
-      $est->bairro = $estabelecimento['bairro'];
-      $est->cidade = $estabelecimento['cidade'];
+      $est->nomeFantasia = $estabelecimento['nomeFantasia'] ?? "";
+      $est->natureza = $estabelecimento['natureza'] ?? "";
+      $est->tipoUnidade = $estabelecimento['tipoUnidade'] ?? "";
+      $est->esferaAdministrativa = $estabelecimento['esferaAdministrativa'] ?? "";
+      $est->vinculoSus = $estabelecimento['vinculoSus'] ?? "";
+      $est->retencao = $estabelecimento['retencao'] ?? "";
+      $est->fluxoClientela = $estabelecimento['fluxoClientela'] ?? "";
+      $est->origemGeografica = $estabelecimento['origemGeografica'] ?? "";
+      $est->temAtendimentoUrgencia = $estabelecimento['temAtendimentoUrgencia'] ?? "";
+      $est->temAtendimentoAmbulatorial = $estabelecimento['temAtendimentoAmbulatorial'] ?? "";
+      $est->temCentroCirurgico = $estabelecimento['temCentroCirurgico'] ?? "";
+      $est->temObstetra = $estabelecimento['temObstetra'] ?? "";
+      $est->temNeoNatal = $estabelecimento['temNeoNatal'] ?? "";
+      $est->temDialise = $estabelecimento['temDialise'] ?? "";
+      $est->descricaoCompleta = $estabelecimento['descricaoCompleta'] ?? "";
+      $est->tipoUnidadeCnes = $estabelecimento['tipoUnidadeCnes'] ?? "";
+      $est->categoriaUnidade = $estabelecimento['categoriaUnidade'] ?? "";
+      $est->logradouro = $estabelecimento['logradouro'] ?? "";
+      $est->numero = $estabelecimento['numero'] ?? "";
+      $est->bairro = $estabelecimento['bairro'] ?? "";
+      $est->cidade = $estabelecimento['cidade'] ?? "";
       $est->uf = $estabelecimento['uf'];
-      $est->cep = $estabelecimento['cep'];
-      $est->telefone = $estabelecimento['telefone'];
-      $est->turnoAtendimento = $estabelecimento['turnoAtendimento'];
-      $est->lat = $estabelecimento['lat'];
-      $est->long = $estabelecimento['long'];
+      $est->cep = $estabelecimento['cep'] ?? "";
+      $est->telefone = $estabelecimento['telefone'] ?? "";
+      $est->turnoAtendimento = $estabelecimento['turnoAtendimento'] ?? "";
+      $est->lat = $estabelecimento['lat'] ?? "";
+      $est->long = $estabelecimento['long'] ?? "";
       $est->save();
     }
 
     public function handle()
     {
       $ufs = UF::all();
+
       foreach ($ufs as $uf)
       {
-        echo $this->getestabelecimentos($uf);die;
+        foreach (json_decode($this->getestabelecimentos($uf), true) as $est)
+        {
+          $this->saveestabelecimento(array_map(function($item){
+              if ($item == "Sim") return "1";
+              else if ($item == "Não") return "0";
+              return $item;
+
+          },$est));
+        }
       }
 
       //

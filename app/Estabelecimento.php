@@ -11,4 +11,7 @@ class Estabelecimento extends Model
     {
        return $this->belongsTo('App\UF', 'uf', 'sigla');
     }
+    public $primarykey = 'codUnidade';
+    public $timestamps = false;
+    public $incrementing = false;
 }

@@ -15,7 +15,7 @@ class CreateUFsTable extends Migration
     {
         Schema::create('ufs', function (Blueprint $table) {
             $table->string('sigla');
-
+            $table->primary('sigla');
         });
     }
 

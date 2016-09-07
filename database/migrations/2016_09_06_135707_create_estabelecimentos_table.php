@@ -31,7 +31,7 @@ class CreateEstabelecimentosTable extends Migration
             $table->boolean('temObstetra');
             $table->boolean('temNeoNatal');
             $table->boolean('temDialise');
-            $table->string('descricaoCompleta');
+            $table->text('descricaoCompleta');
             $table->string('tipoUnidadeCnes');
             $table->string('categoriaUnidade');
             $table->string('logradouro');
@@ -44,6 +44,10 @@ class CreateEstabelecimentosTable extends Migration
             $table->string('turnoAtendimento');
             $table->string('lat');
             $table->string('long');
+
+            //criação de chaves primárias e chaves estrangeiras
+            $table->primary('codUnidade');
+            $table->foreign('uf')->references('sigla')->on('ufs');
         });
         //
         // "codCnes": 5089824,
