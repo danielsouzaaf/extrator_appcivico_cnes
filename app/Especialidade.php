@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estabelecimento extends Model
+class Especialidade extends Model
 {
     //
-    public function uf()
+    public function estabelecimentos()
     {
-       return $this->belongsTo('App\UF', 'uf', 'sigla');
+        return $this->belongsToMany('App\Estabelecimento');
     }
 
     public $primarykey = 'codUnidade';
