@@ -45,38 +45,39 @@ class ConsultarEstabelecimentos extends Command
 
     private function saveestabelecimento($estabelecimento)
     {
-      $est = new Estabelecimento;
-      $est->codCnes = $estabelecimento['codCnes'];
-      $est->codUnidade = $estabelecimento['codUnidade'];
-      $est->codIbge = $estabelecimento['codIbge'];
-      $est->nomeFantasia = $estabelecimento['nomeFantasia'] ?? "";
-      $est->natureza = $estabelecimento['natureza'] ?? "";
-      $est->tipoUnidade = $estabelecimento['tipoUnidade'] ?? "";
-      $est->esferaAdministrativa = $estabelecimento['esferaAdministrativa'] ?? "";
-      $est->vinculoSus = $estabelecimento['vinculoSus'] ?? "";
-      $est->retencao = $estabelecimento['retencao'] ?? "";
-      $est->fluxoClientela = $estabelecimento['fluxoClientela'] ?? "";
-      $est->origemGeografica = $estabelecimento['origemGeografica'] ?? "";
-      $est->temAtendimentoUrgencia = $estabelecimento['temAtendimentoUrgencia'] ?? "";
-      $est->temAtendimentoAmbulatorial = $estabelecimento['temAtendimentoAmbulatorial'] ?? "";
-      $est->temCentroCirurgico = $estabelecimento['temCentroCirurgico'] ?? "";
-      $est->temObstetra = $estabelecimento['temObstetra'] ?? "";
-      $est->temNeoNatal = $estabelecimento['temNeoNatal'] ?? "";
-      $est->temDialise = $estabelecimento['temDialise'] ?? "";
-      $est->descricaoCompleta = $estabelecimento['descricaoCompleta'] ?? "";
-      $est->tipoUnidadeCnes = $estabelecimento['tipoUnidadeCnes'] ?? "";
-      $est->categoriaUnidade = $estabelecimento['categoriaUnidade'] ?? "";
-      $est->logradouro = $estabelecimento['logradouro'] ?? "";
-      $est->numero = $estabelecimento['numero'] ?? "";
-      $est->bairro = $estabelecimento['bairro'] ?? "";
-      $est->cidade = $estabelecimento['cidade'] ?? "";
-      $est->uf = $estabelecimento['uf'];
-      $est->cep = $estabelecimento['cep'] ?? "";
-      $est->telefone = $estabelecimento['telefone'] ?? "";
-      $est->turnoAtendimento = $estabelecimento['turnoAtendimento'] ?? "";
-      $est->lat = $estabelecimento['lat'] ?? "";
-      $est->long = $estabelecimento['long'] ?? "";
-      $est->save();
+      //$est = new Estabelecimento;
+        $est = Estabelecimento::firstorCreate($estabelecimento);
+//      $est->codCnes = $estabelecimento['codCnes'];
+//      $est->codUnidade = $estabelecimento['codUnidade'];
+//      $est->codIbge = $estabelecimento['codIbge'];
+//      $est->nomeFantasia = $estabelecimento['nomeFantasia'] ?? "";
+//      $est->natureza = $estabelecimento['natureza'] ?? "";
+//      $est->tipoUnidade = $estabelecimento['tipoUnidade'] ?? "";
+//      $est->esferaAdministrativa = $estabelecimento['esferaAdministrativa'] ?? "";
+//      $est->vinculoSus = $estabelecimento['vinculoSus'] ?? "";
+//      $est->retencao = $estabelecimento['retencao'] ?? "";
+//      $est->fluxoClientela = $estabelecimento['fluxoClientela'] ?? "";
+//      $est->origemGeografica = $estabelecimento['origemGeografica'] ?? "";
+//      $est->temAtendimentoUrgencia = $estabelecimento['temAtendimentoUrgencia'] ?? "";
+//      $est->temAtendimentoAmbulatorial = $estabelecimento['temAtendimentoAmbulatorial'] ?? "";
+//      $est->temCentroCirurgico = $estabelecimento['temCentroCirurgico'] ?? "";
+//      $est->temObstetra = $estabelecimento['temObstetra'] ?? "";
+//      $est->temNeoNatal = $estabelecimento['temNeoNatal'] ?? "";
+//      $est->temDialise = $estabelecimento['temDialise'] ?? "";
+//      $est->descricaoCompleta = $estabelecimento['descricaoCompleta'] ?? "";
+//      $est->tipoUnidadeCnes = $estabelecimento['tipoUnidadeCnes'] ?? "";
+//      $est->categoriaUnidade = $estabelecimento['categoriaUnidade'] ?? "";
+//      $est->logradouro = $estabelecimento['logradouro'] ?? "";
+//      $est->numero = $estabelecimento['numero'] ?? "";
+//      $est->bairro = $estabelecimento['bairro'] ?? "";
+//      $est->cidade = $estabelecimento['cidade'] ?? "";
+//      $est->uf = $estabelecimento['uf'];
+//      $est->cep = $estabelecimento['cep'] ?? "";
+//      $est->telefone = $estabelecimento['telefone'] ?? "";
+//      $est->turnoAtendimento = $estabelecimento['turnoAtendimento'] ?? "";
+//      $est->lat = $estabelecimento['lat'] ?? "";
+//      $est->long = $estabelecimento['long'] ?? "";
+//      $est->save();
     }
 
     public function handle()
@@ -85,7 +86,9 @@ class ConsultarEstabelecimentos extends Command
 
       foreach ($ufs as $uf)
       {
-        foreach (json_decode($this->getestabelecimentos($uf), true) as $est)
+          $estabelecimentos = json_decode($this->getestabelecimentos($uf), true);
+          echo "UF = $uf->sigla. Quantidade de estabelecimentos a processar: " . count($estabelecimentos) . "\n";
+        foreach ($estabelecimentos as $est)
         {
           $this->saveestabelecimento(array_map(function($item){
               if ($item == "Sim") return "1";

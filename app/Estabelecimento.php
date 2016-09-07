@@ -14,4 +14,6 @@ class Estabelecimento extends Model
     public $primarykey = 'codUnidade';
     public $timestamps = false;
     public $incrementing = false;
+
+    protected $guarded = [];
 }
