@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Estabelecimento;
+use App\Especialidade;
 
 class ConsultarEspecialidades extends Command
 {
@@ -31,9 +32,16 @@ class ConsultarEspecialidades extends Command
         parent::__construct();
     }
 
-    private function savewithestabelecimento($codUnidade)
+    private function savewithestabelecimento($codUnidade, $especialidade)
     {
+        
 
+    }
+
+    private function getespecialidade($codUnidade)
+    {
+      return file_get_contents(
+      sprintf('http://mobile-aceite.tcu.gov.br:80/mapa-da-saude/rest/especialidades/unidade/%s', $codUnidade));
     }
 
 
@@ -44,6 +52,16 @@ class ConsultarEspecialidades extends Command
      */
     public function handle()
     {
-        //
+        $estabelecimentos = Estabelecimento::all();
+
+        foreach ($estabelecimentos as $est)
+        {
+          $especialidades = json_decode($this->getespecialidade($est->codUnidade), true)
+
+          foreach ($especialidades as $esp)
+          {
+            $this->savewithestabelecimento($est->codUnidade, $esp);
+          }
+        }
     }
 }
