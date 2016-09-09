@@ -14,10 +14,10 @@ class CreateEspecialidadesTable extends Migration
     public function up()
     {
         Schema::create('especialidades', function (Blueprint $table) {
+            $table->increments('id');
             $table->text('descricaoHabilitacao');
             $table->text('descricaoGrupo');
-            $table->primary('descricaoHabilitacao');
-
+            $table->unique(array('descricaoHabilitacao', 'descricaoGrupo'));
         });
     }
 

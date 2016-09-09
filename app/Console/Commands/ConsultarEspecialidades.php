@@ -32,9 +32,11 @@ class ConsultarEspecialidades extends Command
         parent::__construct();
     }
 
-    private function savewithestabelecimento($codUnidade, $especialidade)
+    private function savewithestabelecimento($est, $especialidade)
     {
-        
+        $esp = Especialidade::firstorCreate($especialidade);
+        //$est = Estabelecimento::find($codUnidade);
+        $est->especialidades()->save($esp);
 
     }
 
@@ -56,11 +58,11 @@ class ConsultarEspecialidades extends Command
 
         foreach ($estabelecimentos as $est)
         {
-          $especialidades = json_decode($this->getespecialidade($est->codUnidade), true)
-
+          $especialidades = json_decode($this->getespecialidade($est->codUnidade), true);
           foreach ($especialidades as $esp)
           {
-            $this->savewithestabelecimento($est->codUnidade, $esp);
+            print_r($esp);
+            $this->savewithestabelecimento($est, $esp);
           }
         }
     }

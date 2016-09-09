@@ -20,8 +20,8 @@ class CreateEstabelecimentosEspecialidadesTable extends Migration
             $table->foreign('estabelecimento_codUnidade')->references('codUnidade')
                 ->on('estabelecimentos')->onDelete('cascade');
 
-            $table->text('especialidade_descricaoHabilitacao')->nullable();
-            $table->foreign('especialidade_descricaoHabilitacao')->references('descricaoHabilitacao')
+            $table->integer('especialidade_id')->nullable();
+            $table->foreign('especialidade_id')->references('id')
                 ->on('especialidades')->onDelete('cascade');
         });
     }

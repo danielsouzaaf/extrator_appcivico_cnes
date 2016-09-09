@@ -12,9 +12,9 @@ class Especialidade extends Model
         return $this->belongsToMany('App\Estabelecimento');
     }
 
-    public $primarykey = 'codUnidade';
+    //public $primaryKey = 'codUnidade';
     public $timestamps = false;
-    public $incrementing = false;
+    //public $incrementing = false;
 
     protected $guarded = [];
 }
