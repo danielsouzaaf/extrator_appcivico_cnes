@@ -9,7 +9,7 @@ class Especialidade extends Model
     //
     public function estabelecimentos()
     {
-        return $this->belongsToMany('App\Estabelecimento');
+        return $this->belongsToMany('App\Estabelecimento', 'estabelecimentos_especialidades', 'especialidade_id', 'estabelecimento_codUnidade');
     }
 
     //public $primaryKey = 'codUnidade';
