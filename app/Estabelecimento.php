@@ -14,7 +14,14 @@ class Estabelecimento extends Model
 
     public function especialidades()
     {
-        return $this->belongsToMany('App\Especialidade', 'estabelecimentos_especialidades', 'estabelecimento_codUnidade', 'especialidade_id');
+        return $this->belongsToMany('App\Especialidade', 'estabelecimentos_especialidades',
+            'estabelecimento_codUnidade', 'especialidade_id');
+    }
+
+    public function servicosespecializados()
+    {
+        return $this->belongsToMany('App\Especialidade', 'estabelecimentos_servicos_especializados',
+            'estabelecimento_codUnidade', 'servico_especializado_id');
     }
 
     protected $primaryKey = 'codUnidade';
