@@ -11,7 +11,13 @@ class Estabelecimento extends Model
     {
        return $this->belongsTo('App\UF', 'uf', 'sigla');
     }
-    public $primarykey = 'codUnidade';
+
+    public function especialidades()
+    {
+        return $this->belongsToMany('App\Especialidade', 'estabelecimentos_especialidades', 'estabelecimento_codUnidade', 'especialidade_id');
+    }
+
+    protected $primaryKey = 'codUnidade';
     public $timestamps = false;
     public $incrementing = false;
 
