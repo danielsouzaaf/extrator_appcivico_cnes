@@ -27,7 +27,7 @@ class ConsultarServicosEspecializados extends Command
     {
         $sesp = ServicoEspecializado::firstorCreate($servicoespecializado);
         //$est = Estabelecimento::find($codUnidade);
-        $est->servicosespecializados()->save($servicoespecializado);
+        $est->servicosespecializados()->save($sesp);
 
     }
 
@@ -60,13 +60,13 @@ class ConsultarServicosEspecializados extends Command
 
       foreach ($estabelecimentos as $est)
       {
-        $servicosespecializados = json_decode($this->getservicosespecializados($est->codUnidade), true);      
+        $servicosespecializados = json_decode($this->getservicosespecializados($est->codUnidade), true);
         foreach ($servicosespecializados as $sesp)
         {
           print_r($sesp);
           $this->savewithestabelecimento($est, $sesp);
         }
-        }
+
       }
     }
 }
