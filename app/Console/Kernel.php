@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
       Commands\ConsultarEstabelecimentos::class,
-      Commands\ConsultarEspecialidades::class
+      Commands\ConsultarEspecialidades::class,
+      Commands\ConsultarServicosEspecializados::class
         //
     ];
 
