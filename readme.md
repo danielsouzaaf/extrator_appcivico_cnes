@@ -1,27 +1,44 @@
-# Laravel PHP Framework
+# Extrator das informações do CNES da API AppCivico
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Objetivo
+Projeto desenvolvido para criar uma aplicação que extrai as informações da API AppCivico e cria uma base de dados confiável sobre as informações do CNES, tendo como intermédio o TCU.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Utilização
+######Clonando o projeto.
+```sh
+$ git clone https://github.com/danielsouzaaf/extrator_appcivico_cnes.git
+```
+######Criando o arquivo .env
+```sh
+$ cd extrator_appcivico_cnes/
+$ cp .env-example .env
+```
+######Abra o arquivo .env e modifique as seguintes linhas para
+DB_CONNECTION=pgsql
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=laravel
+DB_USERNAME=postgres
+DB_PASSWORD=pgadmin
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+######Executando o composer
+```sh
+$ composer install
+```
 
-## Official Documentation
+######Rodando as migrações junto com o Seed de UFS
+```sh
+$ php artisan migrate --seed
+```
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+######Observando as rotas disponiveis
+```sh
+$ php artisan list
+```
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+######Criando a base de dados dos estabelecimentos
+```sh
+$ php artisan consultarcnes:estabelecimentos
+```
+## Licença
+The Extrator AppCivico CNES is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
