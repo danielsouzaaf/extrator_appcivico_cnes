@@ -61,7 +61,6 @@ class ConsultarEspecialidades extends Command
           $especialidades = json_decode($this->getespecialidade($est->codUnidade), true);
           foreach ($especialidades as $esp)
           {
-            print_r($esp);
             $this->savewithestabelecimento($est, $esp);
           }
         }

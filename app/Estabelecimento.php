@@ -24,6 +24,12 @@ class Estabelecimento extends Model
             'estabelecimento_codUnidade', 'servico_especializado_id');
     }
 
+    public function profissionais()
+    {
+        return $this->belongsToMany('App\Profissional', 'estabelecimentos_profissionais',
+            'estabelecimento_codUnidade', 'profissional_id');
+    }
+
     protected $primaryKey = 'codUnidade';
     public $timestamps = false;
     public $incrementing = false;

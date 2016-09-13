@@ -54,16 +54,13 @@ class ConsultarServicosEspecializados extends Command
      */
     public function handle()
     {
-      //$estabelecimentos = Estabelecimento::all();
       $estabelecimentos = Estabelecimento::select('codUnidade')->get();
-      //dd($est);
 
       foreach ($estabelecimentos as $est)
       {
         $servicosespecializados = json_decode($this->getservicosespecializados($est->codUnidade), true);
         foreach ($servicosespecializados as $sesp)
         {
-          print_r($sesp);
           $this->savewithestabelecimento($est, $sesp);
         }
 
