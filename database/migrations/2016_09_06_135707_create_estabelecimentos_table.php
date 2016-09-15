@@ -17,6 +17,7 @@ class CreateEstabelecimentosTable extends Migration
             $table->string('codCnes');
             $table->string('codUnidade');
             $table->string('codIbge');
+	    $table->string('cnpj')->nullable();
             $table->string('nomeFantasia')->nullable();
             $table->string('natureza')->nullable();
             $table->string('tipoUnidade')->nullable();
