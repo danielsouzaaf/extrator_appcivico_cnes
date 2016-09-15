@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Estabelecimento;
-use App\Profissional;
 
 class ConsultarProfissionais extends Command
 {
@@ -24,7 +22,7 @@ class ConsultarProfissionais extends Command
 
     private function savewithestabelecimento($est, $profissional)
     {
-        $prof = Profissional::firstorCreate([
+        $prof = \App\Models\Profissional::firstorCreate([
             'descricaoAtividadeProfissional' => $profissional['descricaoAtividadeProfissional']]);
         //$est = Estabelecimento::find($codUnidade);
         $est->profissionais()->attach($prof, ['quantidade' => $profissional['quantidadeProfissionais']]);
@@ -55,7 +53,7 @@ class ConsultarProfissionais extends Command
      */
     public function handle()
     {
-        $estabelecimentos = Estabelecimento::select('codUnidade')->get();
+        $estabelecimentos = \App\Models\Estabelecimento::select('codUnidade')->get();
 
         foreach ($estabelecimentos as $est)
         {

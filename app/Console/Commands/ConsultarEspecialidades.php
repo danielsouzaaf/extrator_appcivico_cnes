@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Estabelecimento;
-use App\Especialidade;
 
 class ConsultarEspecialidades extends Command
 {
@@ -34,7 +32,8 @@ class ConsultarEspecialidades extends Command
 
     private function savewithestabelecimento($est, $especialidade)
     {
-        $esp = Especialidade::firstorCreate($especialidade);
+        $esp = \App\Models\Especialidade::firstorCreate($especialidade);
+
         //$est = Estabelecimento::find($codUnidade);
         $est->especialidades()->save($esp);
 
@@ -54,7 +53,7 @@ class ConsultarEspecialidades extends Command
      */
     public function handle()
     {
-        $estabelecimentos = Estabelecimento::all();
+        $estabelecimentos = \App\Models\Estabelecimento::all();
 
         foreach ($estabelecimentos as $est)
         {

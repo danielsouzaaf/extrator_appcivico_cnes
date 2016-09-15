@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Estabelecimento;
-use App\UF;
+
 class ConsultarEstabelecimentos extends Command
 {
     /**
@@ -46,7 +45,7 @@ class ConsultarEstabelecimentos extends Command
     private function saveestabelecimento($estabelecimento)
     {
       //$est = new Estabelecimento;
-        $est = Estabelecimento::firstorCreate($estabelecimento);
+        $est = \App\Models\Estabelecimento::firstorCreate($estabelecimento);
 //      $est->codCnes = $estabelecimento['codCnes'];
 //      $est->codUnidade = $estabelecimento['codUnidade'];
 //      $est->codIbge = $estabelecimento['codIbge'];
@@ -82,7 +81,7 @@ class ConsultarEstabelecimentos extends Command
 
     public function handle()
     {
-      $ufs = UF::all();
+      $ufs = \App\Models\UF::all();
 
       foreach ($ufs as $uf)
       {

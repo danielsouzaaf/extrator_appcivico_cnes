@@ -3,8 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Estabelecimento;
-use App\ServicoEspecializado;
 
 class ConsultarServicosEspecializados extends Command
 {
@@ -25,7 +23,7 @@ class ConsultarServicosEspecializados extends Command
 
     private function savewithestabelecimento($est, $servicoespecializado)
     {
-        $sesp = ServicoEspecializado::firstorCreate($servicoespecializado);
+        $sesp = \App\Models\ServicoEspecializado::firstorCreate($servicoespecializado);
         //$est = Estabelecimento::find($codUnidade);
         $est->servicosespecializados()->save($sesp);
 
@@ -54,7 +52,7 @@ class ConsultarServicosEspecializados extends Command
      */
     public function handle()
     {
-      $estabelecimentos = Estabelecimento::select('codUnidade')->get();
+      $estabelecimentos = \App\Models\Estabelecimento::select('codUnidade')->get();
 
       foreach ($estabelecimentos as $est)
       {
