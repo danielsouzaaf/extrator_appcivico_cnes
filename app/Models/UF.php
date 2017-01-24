@@ -9,7 +9,7 @@ class UF extends Model
     //
     public function estabelecimentos()
     {
-      return $this->hasMany('App\Estabelecimento');
+      return $this->hasMany('App\Models\Estabelecimento');
     }
     protected $table = 'ufs';
     protected $primaryKey = 'sigla';
